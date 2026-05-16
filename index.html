@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SECL Machine Intelligence Dashboard | Coal India</title>
+  <meta name="description" content="ML-powered machine efficiency monitoring and predictive maintenance system for South Eastern Coalfields Limited (SECL), a Coal India subsidiary." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Source+Code+Pro:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo-block">
+      <div class="logo-icon">SECL</div>
+      <div class="brand">
+        <div class="brand-main">SECL MACHINE INTELLIGENCE</div>
+        <div class="brand-sub">South Eastern Coalfields Ltd &middot; Coal India Subsidiary</div>
+      </div>
+    </div>
+    <div class="status-bar">
+      <div class="live-badge"><span class="live-dot"></span>LIVE MONITORING</div>
+      <div class="timestamp" id="ts">—</div>
+    </div>
+  </header>
+
+  <!-- KPI BAR -->
+  <div class="main-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Machines Online</div>
+      <div class="kpi-val" id="kpi-online">—</div>
+      <div class="kpi-sub">of 9 monitored units</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Avg Efficiency</div>
+      <div class="kpi-val" id="kpi-eff">—</div>
+      <div class="kpi-sub">fleet-wide score</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Maintenance Alert</div>
+      <div class="kpi-val kpi-small" id="kpi-maint">—</div>
+      <div class="kpi-sub">ML-predicted</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Critical Faults</div>
+      <div class="kpi-val kpi-danger" id="kpi-fault">—</div>
+      <div class="kpi-sub">require immediate action</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- MACHINE FLEET -->
+    <section>
+      <div class="section-title">Machine Fleet — Click a unit to inspect</div>
+      <div class="machines-grid" id="machines-grid">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- DETAIL PANEL -->
+    <section class="detail-panel" id="detail-panel">
+      <div class="section-title" id="detail-name">Unit Detail</div>
+      <div class="detail-top">
+        <div class="gauge-section">
+          <div class="gauge-wrap">
+            <svg class="gauge-svg" viewBox="0 0 160 100" id="gauge-svg" role="img" aria-label="Efficiency gauge">
+              <path d="M20 90 A70 70 0 0 1 140 90" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="10" stroke-linecap="round"/>
+              <path d="M20 90 A70 70 0 0 1 140 90" fill="none" stroke="#e8a020" stroke-width="10" stroke-linecap="round"
+                    id="gauge-arc" stroke-dasharray="0 220"/>
+            </svg>
+            <div class="gauge-val" id="gauge-val">—</div>
+            <div class="gauge-lbl">Efficiency Score</div>
+          </div>
+        </div>
+        <div class="detail-metrics" id="detail-metrics">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+      <div class="ml-output" id="ml-output">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- CHARTS ROW -->
+    <div class="chart-row">
+      <div class="chart-card">
+        <div class="chart-title">Efficiency Trend — Last 12h</div>
+        <div class="chart-wrap">
+          <canvas id="trendChart" role="img" aria-label="Efficiency trend over last 12 hours">Select a machine to view trend.</canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Anomaly Log</div>
+        <div class="anomaly-list" id="anomaly-log">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-left">
+      ML MODEL: ISOLATION FOREST + RANDOM FOREST &middot; SECL BILASPUR HQ &middot; v2.4.1
+    </div>
+    <div class="footer-right">
+      <button class="refresh-btn" onclick="refreshData()">
+        <i class="fa fa-rotate-right"></i> REFRESH
+      </button>
+      <button class="predict-btn" onclick="runFullPrediction()">
+        <i class="fa fa-play"></i> RUN ML PREDICTION
+      </button>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <script src="js/ml-model.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
